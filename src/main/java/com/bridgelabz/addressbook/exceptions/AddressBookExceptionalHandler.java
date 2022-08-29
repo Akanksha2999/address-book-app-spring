@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook.exceptions;
 
+import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import com.bridgelabz.addressbook.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,12 @@ public class AddressBookExceptionalHandler {
         List<String> errMesg = errorList.stream().map(objErr -> objErr.getDefaultMessage())
                 .collect(Collectors.toList());
         ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", errMesg);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AddressBookException.class)
+    public ResponseEntity<ResponseDTO> handleAddressBookException(AddressBookException exception){
+        ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST Request",exception.getMessage());
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 }

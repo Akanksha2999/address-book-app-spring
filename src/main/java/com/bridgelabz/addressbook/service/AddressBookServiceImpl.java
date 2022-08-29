@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook.service;
 
 import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import com.bridgelabz.addressbook.entity.AddressBookData;
+import com.bridgelabz.addressbook.exceptions.AddressBookException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,10 @@ public class AddressBookServiceImpl implements AddressBookService{
     }
 
     public AddressBookData getAddressBookDataById(int personId){
-        return addressBookDataList.get(personId-1);
+        return addressBookDataList.stream()
+                .filter(addressBookData -> addressBookData.getPersonId() == personId)
+                .findFirst()
+                .orElseThrow(() -> new AddressBookException("User Not Found"));
     }
 
     public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO){
