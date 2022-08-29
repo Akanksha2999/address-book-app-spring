@@ -11,8 +11,8 @@ public @Data class AddressBookData {
     private String address;
     private String city;
     private String state;
-    private int zipCode;
-    private long phoneNumber;
+    private String zipCode;
+    private String phoneNumber;
     private String emailId;
 
 
