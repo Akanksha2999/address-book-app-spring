@@ -4,7 +4,9 @@ import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "user_address_book")
@@ -34,7 +36,7 @@ public @Data class AddressBookData {
     @ElementCollection
     @CollectionTable(name = "person_emailId", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "emailId")
-    private List<String> emailId;
+    private List<String> emailId = new ArrayList<>();
 
     public AddressBookData(){
 
@@ -44,7 +46,6 @@ public @Data class AddressBookData {
         this.updateAddressBookData(addressBookDTO);
     }
     public void updateAddressBookData(AddressBookDTO addressBookDTO){
-        this.personId = personId;
         this.firstName = addressBookDTO.firstName;
         this.lastName = addressBookDTO.lastName;
         this.gender = addressBookDTO.gender;

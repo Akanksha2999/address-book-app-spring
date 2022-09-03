@@ -25,8 +25,6 @@ public @ToString class AddressBookDTO {
     public String zipCode;
     @Pattern(regexp = "^[789][0-9]{9}$", message = "Phone Number Is Invalid")
     public String phoneNumber;
-    @Email(message = "Email Id Is Invalid", regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
-    @NotEmpty(message = "Email cannot be empty")
     public List<String> emailId;
 
 }
