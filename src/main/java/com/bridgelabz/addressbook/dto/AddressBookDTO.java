@@ -1,14 +1,13 @@
 package com.bridgelabz.addressbook.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
+import java.util.List;
 
 
-public @Data class AddressBookDTO {
+public @ToString class AddressBookDTO {
 
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "User's first name is Invalid")
     public String firstName;
@@ -26,7 +25,8 @@ public @Data class AddressBookDTO {
     public String zipCode;
     @Pattern(regexp = "^[789][0-9]{9}$", message = "Phone Number Is Invalid")
     public String phoneNumber;
-    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",flags = Pattern.Flag.CASE_INSENSITIVE,message = "Email Id Is Invalid")
-    public String emailId;
+    @Email(message = "Email Id Is Invalid", regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
+    @NotEmpty(message = "Email cannot be empty")
+    public List<String> emailId;
 
 }
